@@ -33,3 +33,87 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+    console.log('Please build your team.')
+    
+
+
+    const managerInfo = [
+    
+        {
+            type: 'input',
+            message: 'What is your manager' + "'"+ 's'+ ' name?',
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: 'What is your manager' + "'"+ 's' + ' id?',
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: 'What is your manager'+ "'"+ 's' + ' email?',
+            name: 'email',
+        },
+
+        {   type: 'input',
+            message: 'What is your manager'+"'"+'s'+ ' office number?',
+            name: 'officeNumber',
+
+        },
+
+        {
+            type: 'list',
+            message: 'Which type of team member would you like to add?',
+            name: 'team',
+            choices: ['Engineer', 'Intern', 'I don'+"'"+'t'+'want to add any more team members.', ]
+        },  
+
+
+    ]
+
+    const engineerInfo = [
+        {
+            type: 'input',
+            message: 'What is your engineer'+"'"+'s'+'name?',
+            name: 'name',
+        },
+
+        {
+            type: 'input',
+            message: 'What is your engineer' + "'"+ 's' + ' id?',
+            name: 'id',
+        },
+
+        {
+            type: 'input',
+            message: 'What is your engineer'+ "'"+ 's' + ' email?',
+            name: 'email',
+        },
+
+        {
+            type: 'input',
+            message: 'What is your engineer'+ "'"+ 's' + ' GitHub username?',
+            name: 'email',
+        },
+
+        {
+            type: 'list',
+            message: 'Which type of team member would you like to add?',
+            name: 'team',
+            choices: ['Engineer', 'Intern', 'I don'+"'"+'t'+'want to add any more team members.', ]
+        },  
+
+           
+        
+
+    
+    ]
+
+inquirer.prompt(managerInfo).then((teamInfo)=> {
+    let role = `${teamInfo.choices}`
+    if (role === 'Engineer'){
+        inquirer.prompt(engineerInfo);
+    }
+});
+    
