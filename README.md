@@ -25,7 +25,7 @@ npm init npm install inquirer
 
 
 ## Usage
-Run the following command at the root of your project and answer the prompted questions:
+Run the following command and answer the prompted questions about your engineering team.:
 ```
 node app.js
 ```
@@ -34,12 +34,6 @@ node app.js
 ## License
 MIT
 
-
-## Contribution
-
-
-
-## Technologies
 
 
 
