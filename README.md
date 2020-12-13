@@ -28,6 +28,7 @@ npm init npm install inquirer
 Run the following command at the root of your project and answer the prompted questions:
 ```
 node app.js
+```
 
 
 ## License
