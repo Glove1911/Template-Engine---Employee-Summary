@@ -28,9 +28,7 @@ Run the following command and answer the prompted questions about your engineeri
 node app.js
 ```
 
-A demo of the application can be found [here.]
-
-
+A demo of the application can be found [here.](https://github.com/Glove1911/Template-Engine---Employee-Summary/blob/main/Untitled_%20Dec%2012%2C%202020%207_21%20PM.gif)
 ## License
 MIT
 
