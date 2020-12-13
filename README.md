@@ -14,6 +14,7 @@
  ## Description
 A software engineering team generator command line application that prompts the use for information about the team members.  The user can input any number of team members, and they may be a mix of engineers and interns.  Once the user has completed building the team , the application will generate will create an HTML file that displays a formatted team roster based on the information provided by the user.
 
+<img src = "https://github.com/Glove1911/Template-Engine---Employee-Summary/blob/main/9ED653D4-C300-4230-9312-10E5855A2FFC.jpeg">
 
 ## Installation
 To install dependencies run the following command: 
