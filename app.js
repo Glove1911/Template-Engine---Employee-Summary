@@ -34,86 +34,143 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-    console.log('Please build your team.')
-    
+console.log('Please build your team.')
+
+const teamMembers = [];
+
+const managerInfo = [
+
+    {
+        type: 'input',
+        message: 'What is your manager' + "'" + 's' + ' name?',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'What is your manager' + "'" + 's' + ' id?',
+        name: 'id',
+    },
+    {
+        type: 'input',
+        message: 'What is your manager' + "'" + 's' + ' email?',
+        name: 'email',
+    },
+
+    {
+        type: 'input',
+        message: 'What is your manager' + "'" + 's' + ' office number?',
+        name: 'officeNumber',
+
+    },
 
 
-    const managerInfo = [
-    
-        {
-            type: 'input',
-            message: 'What is your manager' + "'"+ 's'+ ' name?',
-            name: 'name',
-        },
-        {
-            type: 'input',
-            message: 'What is your manager' + "'"+ 's' + ' id?',
-            name: 'id',
-        },
-        {
-            type: 'input',
-            message: 'What is your manager'+ "'"+ 's' + ' email?',
-            name: 'email',
-        },
-
-        {   type: 'input',
-            message: 'What is your manager'+"'"+'s'+ ' office number?',
-            name: 'officeNumber',
-
-        },
-
-        {
-            type: 'list',
-            message: 'Which type of team member would you like to add?',
-            name: 'team',
-            choices: ['Engineer', 'Intern', 'I don'+"'"+'t'+'want to add any more team members.', ]
-        },  
 
 
-    ]
+]
 
-    const engineerInfo = [
-        {
-            type: 'input',
-            message: 'What is your engineer'+"'"+'s'+'name?',
-            name: 'name',
-        },
+const engineerInfo = [
+    {
+        type: 'input',
+        message: 'What is your engineer' + "'" + 's' + ' name?',
+        name: 'name',
+    },
 
-        {
-            type: 'input',
-            message: 'What is your engineer' + "'"+ 's' + ' id?',
-            name: 'id',
-        },
+    {
+        type: 'input',
+        message: 'What is your engineer' + "'" + 's' + ' id?',
+        name: 'id',
+    },
 
-        {
-            type: 'input',
-            message: 'What is your engineer'+ "'"+ 's' + ' email?',
-            name: 'email',
-        },
+    {
+        type: 'input',
+        message: 'What is your engineer' + "'" + 's' + ' email?',
+        name: 'email',
+    },
 
-        {
-            type: 'input',
-            message: 'What is your engineer'+ "'"+ 's' + ' GitHub username?',
-            name: 'email',
-        },
+    {
+        type: 'input',
+        message: 'What is your engineer' + "'" + 's' + ' GitHub username?',
+        name: 'github',
+    },
 
-        {
-            type: 'list',
-            message: 'Which type of team member would you like to add?',
-            name: 'team',
-            choices: ['Engineer', 'Intern', 'I don'+"'"+'t'+'want to add any more team members.', ]
-        },  
 
-           
-        
 
-    
-    ]
 
-inquirer.prompt(managerInfo).then((teamInfo)=> {
-    let role = `${teamInfo.choices}`
-    if (role === 'Engineer'){
-        inquirer.prompt(engineerInfo);
-    }
+
+
+
+]
+
+const internInfo = [
+    {
+        type: 'input',
+        message: 'What is your intern' + "'" + 's' + ' name?',
+        name: 'name',
+    },
+
+    {
+        type: 'input',
+        message: 'What is your intern' + "'" + 's' + ' id?',
+        name: 'id',
+    },
+
+    {
+        type: 'input',
+        message: 'What is your intern' + "'" + 's' + ' email?',
+        name: 'email',
+    },
+
+    {
+        type: 'input',
+        message: 'What is your intern' + "'" + 's' + ' School?',
+        name: 'school',
+    },
+
+
+
+]
+
+const addStaff = [
+    {
+        type: 'list',
+        message: 'Which type of team member would you like to add?',
+        name: 'team',
+        choices: ['Engineer', 'Intern', 'I don' + "'" + 't' + ' want to add any more team members.',]
+    },
+]
+// Function to ask questions specific to engineer or intern and create new objects for  engineer and intern.
+
+function addTeam() {
+    inquirer.prompt(addStaff).then((newStaff) => {
+        if (newStaff.team === 'Engineer') {
+            inquirer.prompt(engineerInfo).then((engineerRole) => {
+                let newEngineer = new Engineer(engineerRole.name, engineerRole.id, engineerRole.email, engineerRole.github,);
+                teamMembers.push(newEngineer);
+                addTeam();
+                fs.writeFileSync(outputPath,render(teamMembers),"utf-8")
+            });
+        }
+        else if (newStaff.team === 'Intern') {
+            inquirer.prompt(internInfo).then((internRole) => {
+                let newIntern = new Intern(internRole.name, internRole.id, internRole.email, internRole.school);
+                teamMembers.push(newIntern);
+                addTeam();
+                fs.writeFileSync(outputPath,render(teamMembers),"utf-8")
+            });
+        }
+    });
+}
+// Creating new manager object
+
+inquirer.prompt(managerInfo).then((teamInfo) => {
+    console.log(teamInfo);
+    let managerName = new Manager(teamInfo.name, teamInfo.id, teamInfo.email, teamInfo.officeNumber);
+    teamMembers.push(managerName);
+    console.log(teamMembers);
+
+    addTeam();
+    fs.writeFileSync(outputPath,render(teamMembers),"utf-8")
 });
-    
+
+
+
